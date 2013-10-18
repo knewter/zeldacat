@@ -5,13 +5,12 @@ defmodule ZeldacatTest do
   test "something with a health component can die" do
     # Create Entity, add health component, then kill it!
     {:ok, entity} = Entity.init()
-    Entity.add_component(entity, :health_component, 100)
+    Entity.add_component(entity, HealthComponent, 100)
+    assert HealthComponent.get_hp(entity) == 100
     assert HealthComponent.alive?(entity) == true
-  """
-    Entity.notify(entity, {hit, 50})
-    assert HealthComponent.alive?(entity) == true
-    Entity.notify(entity, {hit, 50})
+    Entity.notify(entity, {:hit, 50})
+    assert HealthComponent.get_hp(entity) == 50
+    Entity.notify(entity, {:hit, 50})
     assert HealthComponent.alive?(entity) == false
-  """
   end
 end

@@ -1,44 +1,34 @@
-defmodule NotificationsEventHandler do
-  use GenEvent.Behaviour
+defmodule GenEvent.BehaviourTest do
+  use ExUnit.Case, async: true
 
-  # Callbacks
+  defmodule MyEventHandler do
+    use GenEvent.Behaviour
 
-  def init(_) do
-    { :ok, [] }
+    # Callbacks
+
+    def init(_) do
+      { :ok, [] }
+    end
+
+    def handle_event({:notification, x}, notifications) do
+      { :ok, [x|notifications] }
+    end
+
+    def handle_call(:notifications, notifications) do
+      {:ok, Enum.reverse(notifications), []}
+    end
+
   end
 
-  def handle_event({:notification, x}, notifications) do
-    { :ok, [x|notifications] }
-  end
-
-  def handle_call(:notifications, notifications) do
-    {:ok, Enum.reverse(notifications), []}
-  end
-end
-
-defmodule NotificationsGenEventTest do
-  use ExUnit.Case
-
-  test "how it works" do
+  test :using do
     { :ok, pid } = :gen_event.start_link
-    #=> {:ok,#PID<0.42.0>}
-
-    :gen_event.add_handler(pid, NotificationsEventHandler, [])
-    #=> :ok
+    :gen_event.add_handler(pid, MyEventHandler, [])
 
     :gen_event.notify(pid, {:notification, 1})
-    #=> :ok
-
     :gen_event.notify(pid, {:notification, 2})
-    #=> :ok
 
-    notifications = :gen_event.call(pid, MyEventHandler, :notifications)
-    assert notifications == [1, 2]
-    #=> [1, 2]
-
-    notifications = :gen_event.call(pid, MyEventHandler, :notifications)
-    assert notifications = []
-    #=> []
+    assert :gen_event.call(pid, MyEventHandler, :notifications) == [1, 2]
+    assert :gen_event.call(pid, MyEventHandler, :notifications) == []
   end
-end
 
+end
