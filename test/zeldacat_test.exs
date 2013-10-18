@@ -2,7 +2,16 @@
 defmodule ZeldacatTest do
   use ExUnit.Case
 
-  test "the truth" do
-    assert(true)
+  test "something with a health component can die" do
+    # Create Entity, add health component, then kill it!
+    {:ok, entity} = Entity.init()
+    Entity.add_component(entity, :health_component, 100)
+    assert HealthComponent.alive?(entity) == true
+  """
+    Entity.notify(entity, {hit, 50})
+    assert HealthComponent.alive?(entity) == true
+    Entity.notify(entity, {hit, 50})
+    assert HealthComponent.alive?(entity) == false
+  """
   end
 end
