@@ -2,3 +2,4 @@
 /deps
 erl_crash.dump
 *.ez
+erlang_and_elixir_docs
