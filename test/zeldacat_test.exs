@@ -13,4 +13,11 @@ defmodule ZeldacatTest do
     Entity.notify(entity, {:hit, 50})
     assert HealthComponent.alive?(entity) == false
   end
+
+  test "something with an XYComponent can move around" do
+    {:ok, entity} = Entity.init()
+    Entity.add_component(entity, XYComponent, {50, 50})
+    Entity.notify(entity, {:move, {:y, 35}})
+    assert XYComponent.get_position(entity) == {50, 35}
+  end
 end
