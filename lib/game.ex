@@ -101,19 +101,6 @@ defmodule Game do
     :actor.new( act, paint, state )
   end
 
-  #          new_actor_counter
-  #
-  # @doc Creates the actor that will display the number of actors presently in the world
-  # @spec new_actor_counter(world) -> counter::actor()
-  defp new_actor_counter(world) do
-    act = fn(as, _parent) -> as end
-    paint = fn( _as, g ) ->
-      :graphics.draw_text( g, :binary.bin_to_list("Giggity"), {20, 20})
-    end
-
-    :actor.new( act, paint )
-  end
-
   #          add_circle
   #
   # @doc If the mouse is pressed, then this will add the circle to the given world.

@@ -10,7 +10,10 @@ defmodule ZeldacatTest do
     assert HealthComponent.alive?(entity) == true
     Entity.notify(entity, {:hit, 50})
     assert HealthComponent.get_hp(entity) == 50
-    Entity.notify(entity, {:hit, 50})
+    Entity.notify(entity, {:heal, 25})
+    assert HealthComponent.get_hp(entity) == 75
+    Entity.notify(entity, {:hit, 75})
+    assert HealthComponent.get_hp(entity) == 0
     assert HealthComponent.alive?(entity) == false
   end
 
