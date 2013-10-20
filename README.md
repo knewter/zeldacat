@@ -16,3 +16,14 @@ It will not initially contain any graphical interface.  My goal is for this to
 be a library that another project can pull in, where that project might layer a
 graphical interface on top of it (either by using ErlWorld or by building an
 angularjs/websockets game engine)
+
+## NOTES:
+
+To run the game.ex, for now, just do the following:
+
+```
+erl -pa ebin/ -pa ~/erlang/erlworld/ErlWorld/ebin/ -pa /usr/local/lib/elixir/lib/elixir/ebin/
+
+> (list_to_atom("Elixir.Game")):start().
+```
+

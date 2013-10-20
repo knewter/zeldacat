@@ -16,7 +16,7 @@ defmodule Game do
   # values for setting up the display
   def width, do: 800
   def height, do: 600
-  def title, do: "Zeldacat"
+  def title, do: 'Zeldacat'
 
   # the name of the random number generator
   def random, do: :random_server
@@ -44,9 +44,9 @@ defmodule Game do
     random_server = :rand.new()
     :erlang.register( random, random_server )
 
-    display    = :display.new( width, height, :binary.bin_to_list(title) )
+    display    = :display.new( width, height, title )
     main_loop  = :mainloop.new( display )
-    circle_img = :image.new( display, :binary.bin_to_list("circle.png") )
+    circle_img = :image.new( display, 'circle.png' )
     :mainloop.run( main_loop, new_world(circle_img) )
   end
 

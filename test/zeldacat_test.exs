@@ -32,4 +32,13 @@ defmodule ZeldacatTest do
     Entity.notify(entity, {:add_weapon, "screwdriver"})
     assert WeaponComponent.list_weapons(entity) == ["bat", "screwdriver"]
   end
+
+  test "one entity can find out if another one is in the same space" do
+    {:ok, boulder} = Entity.init()
+    {:ok, kitty} = Entity.init()
+    Entity.add_component(boulder, XYComponent, {50, 50})
+    Entity.add_component(kitty, XYComponent, {49, 50})
+    assert XYComponent.occupied?(kitty, {50, 50}) == true
+    assert XYComponent.occupied?(kitty, {40, 50}) == false
+  end
 end

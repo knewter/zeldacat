@@ -24,4 +24,6 @@ defmodule XYComponent do
   def handle_call(:get_position, position) do
     {:ok, position, position}
   end
+  def handle_call(:occupied?, position) do
+  end
 end
