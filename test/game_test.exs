@@ -4,6 +4,6 @@ defmodule GameTest do
   test "module variables" do
     assert Game.width == 800
     assert Game.height == 600
-    assert Game.title == "Zeldacat"
+    assert Game.title == 'Zeldacat'
   end
 end

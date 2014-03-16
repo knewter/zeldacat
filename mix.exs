@@ -4,7 +4,6 @@ defmodule Zeldacat.Mixfile do
   def project do
     [ app: :zeldacat,
       version: "0.0.1",
-      elixir: "~> 0.10.4-dev",
       deps: deps ]
   end
 
@@ -16,6 +15,8 @@ defmodule Zeldacat.Mixfile do
   # Returns the list of dependencies in the format:
   # { :foobar, "~> 0.1", git: "https://github.com/elixir-lang/foobar.git" }
   defp deps do
-    []
+    [
+      {:exactor, github: "sasa1977/exactor"}
+    ]
   end
 end
